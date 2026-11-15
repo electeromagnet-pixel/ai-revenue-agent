@@ -72,6 +72,7 @@ jobs:
       - name: Test offline, research-only REO listing gates
         run: |
           python -m unittest discover -s tests -p 'test_reo_source_screen.py' -v
+          python -m unittest discover -s tests -p 'test_reo_program_window.py' -v
           python scripts/reo_source_screen.py --input docs/research/reo_sample_2026-11-13.json > /tmp/apex-reo-research.json
           python - <<'PY'
           import json
