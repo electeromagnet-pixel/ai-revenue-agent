@@ -99,6 +99,43 @@ class InvestorPhaseTests(unittest.TestCase):
                 "investor_phase_asset_id": "DIFFERENT-ASSET"}
         self.assertIn("investor_program_window_unverified", screened(item)["blocking_reasons"])
 
+    def test_homesteps_generic_investor_claim_is_not_first_look_clearance(self):
+        # HomeSteps official guidance protects initial MLS listing days; an
+        # investor-eligible flag alone cannot override a specific listing.
+        item = {**BASE, "official_listing_url": "https://www.homesteps.com/listingdetails/fictional-home",
+                "reo_program": "freddie_homesteps"}
+        result = screened(item)
+        self.assertIn("investor_program_window_unverified", result["blocking_reasons"])
+        self.assertEqual(result["screen_status"], "needs_evidence")
+        self.assertIsNone(result["underwriting"]["scenario_max_offer"])
+        self.assertFalse(result["external_action_allowed"])
+
+    def test_homesteps_unexpired_or_stale_first_look_is_blocked(self):
+        item = {**BASE, "reo_program": "freddie_homesteps",
+                "investor_phase": "first_look_expired",
+                "investor_phase_verified": True,
+                "investor_eligible_from": "2026-11-16",
+                "investor_phase_source_url": "https://www.homesteps.com/listingdetails/fictional-home",
+                "investor_phase_checked_on": AS_OF}
+        self.assertIn("investor_program_window_unverified", screened(item)["blocking_reasons"])
+        item["investor_eligible_from"] = "2026-11-01"
+        item["investor_phase_checked_on"] = "2026-10-30"
+        self.assertIn("investor_program_window_unverified", screened(item)["blocking_reasons"])
+
+    def test_homesteps_current_property_phase_proof_only_clears_research(self):
+        item = {**BASE, "reo_program": "freddie_homesteps",
+                "investor_phase": "first_look_expired",
+                "investor_phase_verified": True,
+                "investor_eligible_from": "2026-11-01",
+                "investor_phase_source_url": "https://www.homesteps.com/listingdetails/fictional-home",
+                "investor_phase_checked_on": AS_OF}
+        result = screened(item)
+        self.assertEqual(result["screen_status"], "research_only_candidate")
+        self.assertFalse(result["underwriting"]["ready"])
+        self.assertFalse(result["external_action_allowed"])
+        item["investor_phase_asset_id"] = "WRONG-ASSET"
+        self.assertIn("investor_program_window_unverified", screened(item)["blocking_reasons"])
+
     def test_unknown_or_other_portal_does_not_infer_a_program_phase(self):
         result = screened(BASE)
         self.assertEqual(result["screen_status"], "research_only_candidate")
