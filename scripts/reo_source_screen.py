@@ -174,6 +174,7 @@ def investor_program_window_issues(item: dict, cutoff: date) -> list[str]:
     clear this extra research gate. This does not submit a bid.
     """
     phases = {"fannie_homepath": "first_look_expired",
+              "freddie_homesteps": "first_look_expired",
               "hud_home_store": "extended_listing"}
     program = item.get("reo_program")
     if program not in phases:
