@@ -146,6 +146,13 @@ def main(argv: list[str] | None = None) -> int:
     try:
         plan = make_plan(discover(args.directory, args.recursive, args.max_files),
                          args.pattern, args.language, args.ocr_timeout)
+        # Preflight audit destination BEFORE any source rename; an existing or
+        # unavailable manifest must never cause an unlogged partial apply.
+        if args.manifest:
+            if args.manifest.exists():
+                raise ValueError('manifest_already_exists')
+            if not args.manifest.parent.is_dir():
+                raise ValueError('manifest_parent_missing')
         if args.apply:
             plan = apply_plan(plan)
         if args.manifest:
