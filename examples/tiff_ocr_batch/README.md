@@ -8,7 +8,7 @@ A local Tesseract OCR executable reads TIFF files; the operator supplies a regex
 
     python examples/tiff_ocr_batch/batch_tiff_renamer.py /path/to/scans --pattern 'INVOICE:\s+([A-Z0-9-]+)' --manifest preview.csv
 
-After checking the preview and backing up inputs, add --apply --manifest executed.csv. No OCR text is transmitted over the network or persisted in the manifest. Symlinks, collisions, unmatched labels, unsafe names and existing targets never get silently overwritten. On the same filesystem, exclusive hardlink creation precedes unlinking the source; a partial failure may leave two copies but does not overwrite existing files. Blocked entries prevent apply.
+After checking the preview and backing up inputs, add --apply --manifest executed.csv. Apply REQUIRES an exclusive new manifest: intended actions are written and fsynced BEFORE changes, then result rows are appended. A crash can leave planned-only entries: inspect actual source and destination state before any retry. Preview-only manifests retain the compact status format. No OCR text is transmitted over the network or persisted in the manifest. Symlinks, collisions, unmatched labels, unsafe names and existing targets never get silently overwritten. On the same filesystem, exclusive hardlink creation precedes unlinking the source; a partial failure may leave two copies but does not overwrite existing files. Blocked entries prevent apply.
 
 Python code uses only the standard library; OCR requires a separately installed licensed Tesseract executable and language pack. Default safety limits are 1,000 input TIFFs and 20 seconds OCR per file. These are not throughput benchmarks.
 
