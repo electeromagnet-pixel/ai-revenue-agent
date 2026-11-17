@@ -130,6 +130,29 @@ def write_manifest(path: Path, plan: list[Decision]) -> None:
             writer.writerow([str(d.source), str(d.destination or ''), d.status, d.note])
 
 
+def apply_with_manifest(path: Path, plan: list[Decision]) -> list[Decision]:
+    """Reserve and durably record the intended changes BEFORE mutating any input.
+
+    On crash, an audit may contain only the planned phase. Reconcile actual
+    source/destination state before retrying. Never blindly replay.
+    """
+    if any(d.status == 'blocked' for d in plan):
+        raise ValueError('blocked_plan_must_be_resolved_before_apply')
+    with path.open('x', newline='', encoding='utf-8') as audit:
+        writer = csv.writer(audit)
+        writer.writerow(['phase', 'source', 'target', 'status', 'reason'])
+        for d in plan:
+            writer.writerow(['planned', str(d.source), str(d.destination or ''), d.status, d.note])
+        audit.flush()
+        os.fsync(audit.fileno())
+        results = apply_plan(plan)
+        for d in results:
+            writer.writerow(['result', str(d.source), str(d.destination or ''), d.status, d.note])
+        audit.flush()
+        os.fsync(audit.fileno())
+        return results
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('directory', type=Path)
@@ -143,6 +166,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if args.max_files <= 0 or not 0 < args.ocr_timeout <= 120 or not re.fullmatch(r'[A-Za-z0-9_+-]+', args.language):
         parser.error('invalid safety limits or OCR language')
+    if args.apply and not args.manifest:
+        parser.error('apply_requires_manifest')
     try:
         plan = make_plan(discover(args.directory, args.recursive, args.max_files),
                          args.pattern, args.language, args.ocr_timeout)
@@ -154,8 +179,8 @@ def main(argv: list[str] | None = None) -> int:
             if not args.manifest.parent.is_dir():
                 raise ValueError('manifest_parent_missing')
         if args.apply:
-            plan = apply_plan(plan)
-        if args.manifest:
+            plan = apply_with_manifest(args.manifest, plan)
+        elif args.manifest:
             write_manifest(args.manifest, plan)
     except (ValueError, OSError, re.error) as exc:
         print(f'Error: {exc}', file=sys.stderr)
