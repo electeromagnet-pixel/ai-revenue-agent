@@ -75,4 +75,26 @@ class TiffDemoTests(unittest.TestCase):
             with self.assertRaises(FileExistsError):m.write_manifest(path,[])
             self.assertEqual(before,path.read_bytes())
 
+    def test_existing_manifest_blocks_apply(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            d=Path(tmp);src=d/'source.tif';src.write_bytes(b'fictional')
+            manifest=d/'existing.csv';manifest.write_text('historical')
+            with patch.object(m,'extract_text',return_value='Invoice: ABC-12'):
+                code=m.main([str(d),'--pattern',r'Invoice:\s+(\S+)','--apply','--manifest',str(manifest)])
+            self.assertEqual(code,2)
+            self.assertTrue(src.exists())
+            self.assertFalse((d/'ABC-12.tif').exists())
+            self.assertEqual(manifest.read_text(),'historical')
+
+    def test_atomic_exclusive_link_failure_keeps_original(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            d=Path(tmp);src=d/'source.tif';src.write_bytes(b'fictional')
+            with patch.object(m,'extract_text',return_value='Invoice: ABC-12'):
+                plan=m.make_plan([src],r'Invoice:\s+(\S+)')
+            with patch.object(m.os,'link',side_effect=FileExistsError('concurrent creation')):
+                result=m.apply_plan(plan)
+            self.assertEqual(result[0].status,'blocked')
+            self.assertTrue(src.exists())
+            self.assertFalse((d/'ABC-12.tif').exists())
+
 if __name__=='__main__':unittest.main()
