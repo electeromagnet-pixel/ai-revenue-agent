@@ -86,6 +86,31 @@ class TiffDemoTests(unittest.TestCase):
             self.assertFalse((d/'ABC-12.tif').exists())
             self.assertEqual(manifest.read_text(),'historical')
 
+    def test_apply_requires_manifest(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            src=Path(tmp)/'source.tif';src.write_bytes(b'fictional')
+            with self.assertRaises(SystemExit):
+                m.main([str(tmp),'--pattern',r'Invoice:\\s+(\\S+)','--apply'])
+            self.assertTrue(src.exists())
+
+    def test_apply_reserves_durable_audit_before_rename(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            d=Path(tmp);src=d/'source.tif';src.write_bytes(b'fictional')
+            audit=d/'audit.csv'
+            original=m.apply_plan
+            def check_audit_before_mutation(plan):
+                self.assertTrue(audit.is_file())
+                self.assertIn('planned',audit.read_text())
+                self.assertTrue(src.exists())
+                return original(plan)
+            with patch.object(m,'extract_text',return_value='Invoice: ABC-12'):
+                with patch.object(m,'apply_plan',side_effect=check_audit_before_mutation):
+                    code=m.main([str(d),'--pattern',r'Invoice:\\s+(\\S+)','--apply','--manifest',str(audit)])
+            self.assertEqual(code,0)
+            self.assertFalse(src.exists())
+            self.assertTrue((d/'ABC-12.tif').exists())
+            self.assertIn('result',audit.read_text())
+
     def test_atomic_exclusive_link_failure_keeps_original(self):
         with tempfile.TemporaryDirectory() as tmp:
             d=Path(tmp);src=d/'source.tif';src.write_bytes(b'fictional')
