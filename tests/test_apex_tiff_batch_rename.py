@@ -90,7 +90,7 @@ class TiffDemoTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             src=Path(tmp)/'source.tif';src.write_bytes(b'fictional')
             with self.assertRaises(SystemExit):
-                m.main([str(tmp),'--pattern',r'Invoice:\\s+(\\S+)','--apply'])
+                m.main([str(tmp),'--pattern',r'Invoice:\s+(\S+)','--apply'])
             self.assertTrue(src.exists())
 
     def test_apply_reserves_durable_audit_before_rename(self):
@@ -105,7 +105,7 @@ class TiffDemoTests(unittest.TestCase):
                 return original(plan)
             with patch.object(m,'extract_text',return_value='Invoice: ABC-12'):
                 with patch.object(m,'apply_plan',side_effect=check_audit_before_mutation):
-                    code=m.main([str(d),'--pattern',r'Invoice:\\s+(\\S+)','--apply','--manifest',str(audit)])
+                    code=m.main([str(d),'--pattern',r'Invoice:\s+(\S+)','--apply','--manifest',str(audit)])
             self.assertEqual(code,0)
             self.assertFalse(src.exists())
             self.assertTrue((d/'ABC-12.tif').exists())
