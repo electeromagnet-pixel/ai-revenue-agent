@@ -1,0 +1,5 @@
+[
+  {"id":"fictional_001","synthetic":true,"language":"en","message":"Order #AB-123456 arrived damaged. Can someone help?"},
+  {"id":"fictional_002","synthetic":true,"message":"I was charged twice for order 12345678."},
+  {"id":"fictional_003","synthetic":true,"message":"Where is my package tracking update?"}
+]
