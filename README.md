@@ -23,6 +23,12 @@ Want to measure your own response gap before requesting a preview? [Download the
 For a full **illustrative deliverable format**, see the [14-message fictional cleaning-business response pack](docs/FICTIONAL_14_RESPONSE_PACK_DEMONSTRATION.md). It contains seven inquiry situations with two draft options each and explicit review/permission safeguards. The business and scenarios are invented placeholders, not a real buyer, accepted delivery, customer result or paid order.
 
 
+## Free human-reviewed customer-support triage proof (offline)
+
+For a second, *different* support-workflow problem, inspect the [original, runnable e-commerce support-triage demonstration](examples/ecommerce_support_review/README.md). It processes only fictional tickets by default, suggests internal topics/urgency and review queues, masks order references, and **never sends a customer message**. It requires human review, has explicit permission gates and regression tests, and needs no account, hosted API or paid model. Its heuristics are illustrative, not production-grade classification or documented customer outcomes.
+
+This example is **source-only**: it is not deployed as a support agent, connected to a helpdesk, sold to a client, or available as an automatic reply service. The currently published $100 home-services response pack is a separate, owner-reviewed drafting offer; [its free, consent-based inquiry form](https://apex-content-worker-production.up.railway.app/home-services) does not purchase anything. Any wider customer-support integration would require a separately verified buyer request, permitted inputs, written scope, testing, payment and delivery approvals.
+
 ## Offline research-workflow example (fictional, no customer data)
 
 For a second, fixed-scope automation capability, inspect the [original evidence-to-approval demonstration](examples/evidence_review/README.md) and its [reproducible Python implementation](examples/evidence_review/research_evidence_demo.py). It ingests invented structured records, keeps proposed values pending human review, and exports only explicitly approved corrections with a SHA-256 evidence reference. It uses Python's standard library and local SQLite; no paid API, account signup, or hosted model is required to run the example. The reviewer must independently verify the underlying evidence: a hash is **not** proof that a source's claim is true.
