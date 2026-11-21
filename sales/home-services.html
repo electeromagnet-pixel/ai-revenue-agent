@@ -113,6 +113,10 @@
       if (!params.toString()) {
         params.set('utm_source', 'organic');
         params.set('utm_medium', 'landing');
+      }
+      // An incoming source-only tag must not erase which CTA was clicked.
+      // Retain an explicitly supplied campaign without overwriting it.
+      if (!params.has('utm_campaign')) {
         params.set('utm_campaign', link.dataset.previewCampaign);
       }
       link.href = '/?' + params.toString() + '#lead-form';
