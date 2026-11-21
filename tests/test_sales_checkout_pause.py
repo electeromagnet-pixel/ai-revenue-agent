@@ -85,7 +85,7 @@ class PausedCheckoutOfferTests(unittest.TestCase):
         self.assertIn("replace(/[^a-zA-Z0-9._-]/g, '')", home)
         self.assertIn("slice(0, 80)", home)
         self.assertIn("document.querySelectorAll('a[data-preview-campaign]')", home)
-        self.assertIn("link.href = '/?' + params.toString() + '#lead-form'", home)
+        self.assertIn("link.href = 'https://apex-content-worker-production.up.railway.app/?' + params.toString() + '#lead-form'", home)
         self.assertIn("params.set('utm_campaign', link.dataset.previewCampaign)", home)
         # Inbound utm_source or utm_medium alone must not erase per-link placement
         # attribution; an explicit inbound campaign must still be respected.
@@ -93,6 +93,10 @@ class PausedCheckoutOfferTests(unittest.TestCase):
         self.assertEqual(home.count("params.set('utm_campaign', link.dataset.previewCampaign)"), 1)
         self.assertIn('utm_campaign=home_services_hero#lead-form', home)
         self.assertIn('utm_campaign=home_services#lead-form', home)
+        # The Vercel draft and the Railway release both target the already
+        # allowlisted production inquiry form; no new preview origin is trusted.
+        self.assertEqual(home.count('href="https://apex-content-worker-production.up.railway.app/?utm_source=organic'), 2)
+        self.assertNotIn('href="/?utm_source=organic', home)
         self.assertNotIn('checkout.stripe.com', home.lower())
         self.assertNotIn('buy.stripe.com', home.lower())
 
