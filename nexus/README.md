@@ -10,7 +10,7 @@ NEXUS is an experimental research workflow for documenting problems and evaluati
 - Five agents are deterministic Python modules, not five independent AI models.
 
 ## Evidence rules
-Distinguish `fact`, `hypothesis`, and `inference`. A URL, title, excerpt, or hash does not prove a claim. Keep publication and collection dates separate. Do not invent customers, willingness to pay, costs, revenue, or competitor facts. Unknown values remain null or explicitly unknown.
+Distinguish `fact`, `hypothesis`, and `inference`. A URL, title, excerpt, or hash does not prove a claim. Keep publication and collection dates separate. Do not invent customers, willingness to pay, costs, revenue, or competitor facts. Unknown values remain null or explicitly unknown. Analyst source counts use an explicit `independent_source_group` when supplied; otherwise they conservatively group pages by hostname. Hostname grouping is only a proxy, not proof that publishers are independent. Human review must confirm independence before treating sources as corroboration.
 
 ## First run
 From repository root:
