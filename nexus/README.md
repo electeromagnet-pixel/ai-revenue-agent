@@ -4,7 +4,7 @@ NEXUS is an experimental research workflow for documenting problems and evaluati
 
 ## Initial scope
 - Geography: Iran; domains: all, initially using manually documented public sources.
-- First study target: at least 20 documented examples.
+- First study target: at least 20 documented examples. The current pilot dataset contains 20 public-source observations from 12 publisher groups; every record is marked `unreviewed` pending human source and claim checks.
 - Zero paid APIs, hosted models, automated outreach, purchases, or external actions.
 - Python standard library only; JSON input/output and optional local SQLite.
 - Five agents are deterministic Python modules, not five independent AI models.
