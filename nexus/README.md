@@ -18,7 +18,7 @@ From repository root:
 python -m unittest discover -s tests/nexus -v
 python -m nexus.pipeline.report --input nexus/data/examples.json
 ```
-The starter data is empty, not market findings. Add verified examples before drawing conclusions.
+The current dataset contains 20 exploratory observations, all still marked unreviewed. They are not market findings or proof of customer demand. Verify each source and claim before drawing conclusions.
 
 ## Workflow
 Explorer validates documented records; Analyst groups recurring problems; Idea Generator proposes hypotheses; Economic Evaluator records knowns and unknowns; Inspector checks provenance; Report exports a reviewable JSON summary.
