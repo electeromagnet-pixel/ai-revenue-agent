@@ -49,8 +49,8 @@ function render(){
  $("orders").innerHTML=visible.slice().reverse().map(o=>'<article class="order"><div class="order-top"><strong>'+safe(o.item)+' × '+safe(o.qty)+'</strong><span class="pill">'+safe(labels[o.status]||"نامشخص")+'</span></div><p>مشتری: '+safe(o.customer)+' • مبلغ: '+Number(o.amount||0).toLocaleString("fa-IR")+' تومان</p><p class="muted">تاریخ: '+safe(o.date||"ثبت نشده")+(o.note?" • "+safe(o.note):"")+'</p><div class="grid"><select aria-label="تغییر وضعیت" data-status="'+safe(o.id)+'">'+Object.keys(labels).map(k=>'<option value="'+k+'" '+(o.status===k?"selected":"")+'>'+labels[k]+'</option>').join("")+'</select><button type="button" class="secondary" data-delete="'+safe(o.id)+'">حذف این سفارش</button></div></article>').join("");
 }
 $("orderForm").addEventListener("submit",e=>{e.preventDefault();const qty=Number($("qty").value),amount=Number($("amount").value);
- if(!Number.isInteger(qty)||qty<1||!Number.isFinite(amount)||amount<0){alert("تعداد یا مبلغ معتبر نیست.");return;}
- orders.push({id:String(Date.now())+"-"+Math.random().toString(36).slice(2,7),customer:$("customer").value.trim(),item:$("item").value.trim(),qty,amount,status:$("status").value,date:$("date").value,note:$("note").value.trim()});
+ const customer=$("customer").value.trim(),item=$("item").value.trim();if(!customer||!item){alert("نام مستعار مشتری و کالا/خدمت را وارد کنید.");return;}if(!Number.isInteger(qty)||qty<1||qty>9999||!Number.isFinite(amount)||amount<0||amount>999999999999){alert("تعداد باید بین ۱ تا ۹۹۹۹ و مبلغ بین صفر تا ۹۹۹٬۹۹۹٬۹۹۹٬۹۹۹ تومان باشد.");return;}
+ orders.push({id:String(Date.now())+"-"+Math.random().toString(36).slice(2,7),customer,item,qty,amount,status:$("status").value,date:$("date").value,note:$("note").value.trim()});
  $("orderForm").reset();$("qty").value=1;$("amount").value=0;save();});
 $("sample").addEventListener("click",()=>{orders.push({id:"demo-"+Date.now(),customer:"مشتری ساختگی",item:"محصول آزمایشی",qty:2,amount:250000,status:"followup",date:new Date().toISOString().slice(0,10),note:"فقط داده نمایشی"});save();});
 $("orders").addEventListener("change",e=>{const id=e.target.dataset.status;if(!id)return;const o=orders.find(x=>x.id===id);if(o){o.status=e.target.value;save();}});
@@ -71,11 +71,12 @@ $("importFile").addEventListener("change",e=>{
    const allowed=new Set(Object.keys(labels));
    const clean=incoming.map((o,i)=>{
     if(!o||typeof o!=="object"||Array.isArray(o)||typeof o.id!=="string"||!o.id.trim()||
-       typeof o.customer!=="string"||typeof o.item!=="string"||
+       typeof o.customer!=="string"||!o.customer.trim()||o.customer.trim().length>40||
+       typeof o.item!=="string"||!o.item.trim()||o.item.trim().length>60||
        !Number.isInteger(Number(o.qty))||Number(o.qty)<1||Number(o.qty)>9999||
-       !Number.isFinite(Number(o.amount))||Number(o.amount)<0||
+       !Number.isFinite(Number(o.amount))||Number(o.amount)<0||Number(o.amount)>999999999999||
        !allowed.has(o.status))throw new Error("اطلاعات سفارش شماره "+(i+1)+" معتبر نیست؛ هیچ داده‌ای وارد نشد.");
-    return {id:o.id,customer:o.customer.slice(0,40),item:o.item.slice(0,60),
+    return {id:o.id,customer:o.customer.trim(),item:o.item.trim(),
       qty:Number(o.qty),amount:Number(o.amount),status:o.status,
       date:typeof o.date==="string"?o.date.slice(0,20):"",
       note:typeof o.note==="string"?o.note.slice(0,180):""};
