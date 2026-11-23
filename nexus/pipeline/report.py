@@ -1,5 +1,6 @@
 """Run the offline deterministic workflow and print a JSON report."""
-import argparse, json
+import argparse
+import json
 from pathlib import Path
 from nexus.pipeline.collect import load_records
 from nexus.pipeline.normalize import normalize
@@ -26,5 +27,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     result = run(args.input)
     rendered = json.dumps(result, ensure_ascii=False, indent=2)
-    if args.output: Path(args.output).write_text(rendered + "\\n", encoding="utf-8")
+    if args.output:
+        Path(args.output).write_text(rendered + "\n", encoding="utf-8")
     print(rendered)
