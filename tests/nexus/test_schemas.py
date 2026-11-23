@@ -22,6 +22,14 @@ class SchemaFilesTests(unittest.TestCase):
         self.assertIn("evidence_class", data["properties"])
         self.assertFalse(data["additionalProperties"])
 
+    def test_iran_pilot_has_twenty_unique_unreviewed_source_records(self):
+        records = json.loads((ROOT / "nexus" / "data" / "examples.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(records), 20)
+        self.assertEqual(len({row["source_url"] for row in records}), 20)
+        self.assertTrue(all(row.get("review_status") == "unreviewed" for row in records))
+        self.assertTrue(all(row.get("willingness_to_pay_evidence") is None for row in records))
+        self.assertEqual(len({row["independent_source_group"] for row in records}), 12)
+
 
 if __name__ == "__main__":
     unittest.main()
