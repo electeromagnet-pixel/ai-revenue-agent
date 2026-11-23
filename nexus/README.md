@@ -25,3 +25,12 @@ Explorer validates documented records; Analyst groups recurring problems; Idea G
 
 ## Limitations
 This version does not crawl the web, authenticate sources, determine truth automatically, or estimate actual market size. Human review is required. Future source adapters and optional LLM assistance must preserve evidence gates.
+
+
+## Current validation experiment
+- Competitor review: `research/iran_digital_continuity_competitors.md`
+- Seller interview script and pre-registered go/no-go rules: `research/iran_seller_interview_and_decision_protocol.md`
+- Local-only mobile prototype: `prototypes/offline_order_ledger.html`
+- Prototype contract tests: `../tests/nexus/test_offline_prototype_contract.py`
+
+The prototype stores records in this browser's local storage and exports JSON/CSV. It has no account, network sync, encryption, payment processing, or message sending. Use dummy data only. Local storage behavior for a file opened directly on a phone browser must be tested on the target device before any user trial.
