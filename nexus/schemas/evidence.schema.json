@@ -96,6 +96,14 @@
         "disputed",
         "rejected"
       ]
+    },
+    "theme_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "theme_label": {
+      "type": "string",
+      "minLength": 1
     }
   },
   "additionalProperties": false
