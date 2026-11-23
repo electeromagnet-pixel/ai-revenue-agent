@@ -11,7 +11,7 @@ h1{font-size:1.35rem;margin:0 0 8px}h2{font-size:1.05rem;margin:0 0 12px}p{line-
 .panel{background:white;border:1px solid #dce5e0;border-radius:14px;padding:16px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 label{display:block;font-size:.88rem;font-weight:bold;margin-bottom:5px}input,select,textarea,button{font:inherit;width:100%;padding:11px;border:1px solid #cbd7d1;border-radius:9px;background:white;color:#172b27}
 textarea{min-height:72px;resize:vertical}button{background:#173b35;color:white;border:0;font-weight:bold;cursor:pointer}button.secondary{background:#e7efeb;color:#173b35;border:1px solid #cbd7d1}button.danger{background:#8b3030}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.actions button{width:auto;flex:1}.toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.file-button{display:block;width:auto;flex:1;text-align:center;background:#e7efeb;color:#173b35;border:1px solid #cbd7d1;border-radius:9px;padding:11px;font-weight:bold;cursor:pointer}.visually-hidden-file{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.actions button{width:auto;flex:1}.toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
 .order{border:1px solid #dce5e0;border-radius:11px;padding:12px;margin:9px 0}.order-top{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
 .pill{font-size:.78rem;background:#e7efeb;padding:4px 8px;border-radius:20px}.order p{font-size:.9rem}.empty{text-align:center;color:#64736e;padding:24px}
 footer{font-size:.8rem;color:#64736e;text-align:center;padding:18px}@media(max-width:560px){.grid,.toolbar{grid-template-columns:1fr}body{padding:10px}.panel{padding:12px}}
@@ -30,7 +30,7 @@ footer{font-size:.8rem;color:#64736e;text-align:center;padding:18px}@media(max-w
 <div class="actions"><button type="submit">ذخیره سفارش</button><button type="button" class="secondary" id="sample">افزودن سفارش ساختگی</button></div></form></section>
 <section class="panel"><div class="order-top"><h2>فهرست سفارش‌ها</h2><strong id="count">۰ سفارش</strong></div>
 <div class="toolbar"><input id="search" type="search" placeholder="جست‌وجو در نام مستعار یا کالا"><select id="filter"><option value="all">همه وضعیت‌ها</option><option value="new">جدید</option><option value="preparing">در حال آماده‌سازی</option><option value="sent">ارسال‌شده</option><option value="done">تکمیل‌شده</option><option value="followup">نیازمند پیگیری</option></select></div>
-<div id="orders" aria-live="polite"></div><div class="actions"><button class="secondary" id="exportJson" type="button">پشتیبان JSON</button><button class="secondary" id="importJson" type="button">بازیابی از پشتیبان JSON</button><input id="importFile" type="file" accept=".json,application/json" hidden><button class="secondary" id="exportCsv" type="button">خروجی CSV</button><button class="danger" id="clear" type="button">پاک کردن همه داده‌ها</button></div><p class="muted">بازیابی، سفارش‌های جدید را اضافه می‌کند و سفارش‌های دارای شناسه تکراری را نادیده می‌گیرد؛ اطلاعات فعلی پاک نمی‌شوند.</p></section>
+<div id="orders" aria-live="polite"></div><div class="actions"><button class="secondary" id="exportJson" type="button">پشتیبان JSON</button><label class="file-button" for="importFile">بازیابی از پشتیبان JSON</label><input id="importFile" class="visually-hidden-file" type="file" accept=".json,application/json"><button class="secondary" id="exportCsv" type="button">خروجی CSV</button><button class="danger" id="clear" type="button">پاک کردن همه داده‌ها</button></div><p class="muted">بازیابی، سفارش‌های جدید را اضافه می‌کند و سفارش‌های دارای شناسه تکراری را نادیده می‌گیرد؛ اطلاعات فعلی پاک نمی‌شوند.</p></section>
 <footer>نسخه نمایشی محلی • بدون حساب کاربری • بدون اتصال شبکه • فقط برای داده ساختگی</footer>
 <script>
 (function(){
@@ -58,7 +58,6 @@ $("orders").addEventListener("click",e=>{const id=e.target.dataset.delete;if(!id
 $("search").addEventListener("input",render);$("filter").addEventListener("change",render);
 function download(name,content,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 $("exportJson").addEventListener("click",()=>download("nexus-demo-orders.json",JSON.stringify({exported_at:new Date().toISOString(),orders},null,2),"application/json;charset=utf-8"));
-$("importJson").addEventListener("click",()=>$("importFile").click());
 $("importFile").addEventListener("change",e=>{
  const file=e.target.files&&e.target.files[0];e.target.value="";if(!file)return;
  if(file.size>2*1024*1024){alert("حجم فایل بیشتر از ۲ مگابایت است.");return;}
