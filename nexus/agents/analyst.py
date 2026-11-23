@@ -2,7 +2,7 @@
 import re
 
 def normalize_problem(value):
-    return re.sub(r"\\s+", " ", re.sub(r"[^\\w\\s]", " ", value.casefold())).strip()
+    return re.sub(r"\s+", " ", re.sub(r"[^\w\s]", " ", value.casefold())).strip()
 
 def analyze(records):
     groups = {}
