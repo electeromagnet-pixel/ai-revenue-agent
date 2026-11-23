@@ -80,5 +80,12 @@ class OfflinePrototypeContractTests(unittest.TestCase):
             self.assertIn(token, html)
         self.assertIn('replace(/[&<>"\']/g,c=>', html)
 
+
+    def test_csv_export_neutralizes_formula_like_cell_prefixes(self):
+        html = PROTOTYPE.read_text(encoding="utf-8")
+        self.assertIn("const cell=v=>", html)
+        self.assertIn("replace(/^[=+@-]/,\"'\")", html)
+        self.assertIn('download("nexus-demo-orders.csv"', html)
+
 if __name__ == "__main__":
     unittest.main()
