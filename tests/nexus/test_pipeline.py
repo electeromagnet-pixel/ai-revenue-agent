@@ -25,10 +25,26 @@ class PipelineTests(unittest.TestCase):
         ]
         self.assertEqual(analyze(rows)[0]["independent_source_count"], 1)
 
-    def test_normalization_preserves_explicit_source_group(self):
+    def test_normalization_preserves_source_group_and_theme(self):
         rows = [{"problem_statement": "Slow delivery", "source_url": "https://site.example/a",
-                 "independent_source_group": "publisher-x"}]
-        self.assertEqual(normalize(rows)[0]["independent_source_group"], "publisher-x")
+                 "independent_source_group": "publisher-x", "theme_id": "DELIVERY",
+                 "theme_label": "Delivery problems"}]
+        normalized = normalize(rows)[0]
+        self.assertEqual(normalized["independent_source_group"], "publisher-x")
+        self.assertEqual(normalized["theme_id"], "DELIVERY")
+
+    def test_curated_theme_groups_distinct_problem_wordings_transparently(self):
+        rows = [
+            {"problem_statement": "Loses customers during outages",
+             "theme_id": "DIGITAL", "theme_label": "Digital continuity",
+             "source_url": "https://a.example/1"},
+            {"problem_statement": "Online shop cannot reach buyers",
+             "theme_id": "DIGITAL", "theme_label": "Digital continuity",
+             "source_url": "https://b.example/1"},
+        ]
+        pattern = analyze(rows)[0]
+        self.assertEqual(pattern["recurrence_count"], 2)
+        self.assertEqual(pattern["classification_method"], "explicit_curated_theme")
 
     def test_pattern_is_not_demand_or_revenue(self):
         rows = [
