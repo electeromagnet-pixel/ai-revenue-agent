@@ -204,7 +204,7 @@ jobs:
         env:
           REVENUE_DB_PATH: /tmp/revenue_agent.db
         run: |
-          printf 'first_name,company_name,contact_email,industry,pain_point,website,contact_allowed\nJane,Jane Plumbing,jane@example.com,Home Services,slow inquiry follow-up,https://example.com,true\n' > /tmp/leads.csv
+          printf 'first_name,company_name,contact_email,industry,pain_point,website,contact_allowed\\nJane,Jane Plumbing,jane@example.com,Home Services,slow inquiry follow-up,https://example.com,true\\n' > /tmp/leads.csv
           python scripts/import_leads.py /tmp/leads.csv | python scripts/revenue_cycle.py > /tmp/result.json
           python - <<'PY'
           import json
@@ -277,3 +277,14 @@ jobs:
       - name: Test Stripe revenue event normalization
         run: node --test tests/stripe_paid_event.test.mjs tests/stripe_apex_ownership.test.mjs tests/stripe_webhook_body.test.mjs tests/stripe_lead_attribution.test.mjs
 
+  nexus-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile NEXUS Python modules
+        run: python -m compileall -q nexus tests/nexus
+      - name: Run NEXUS unit tests
+        run: python -m unittest discover -s tests/nexus -v
