@@ -26,7 +26,7 @@ class OfflinePrototypeContractTests(unittest.TestCase):
     def test_restore_is_non_destructive_and_checks_duplicate_ids(self):
         html = PROTOTYPE.read_text(encoding="utf-8")
         self.assertIn("const known=new Set(orders.map(o=>o.id))", html)
-        self.assertIn("clean.filter(o=>!known.has(o.id))", html)
+        self.assertIn("known.add(o.id)", html)
         self.assertIn("orders=orders.concat(additions)", html)
         self.assertIn("if(!confirm(", html)
         self.assertIn("هیچ داده‌ای وارد نشد", html)
