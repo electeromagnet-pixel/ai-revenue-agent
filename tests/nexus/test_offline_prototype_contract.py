@@ -19,7 +19,7 @@ class OfflinePrototypeContractTests(unittest.TestCase):
         html = PROTOTYPE.read_text(encoding="utf-8")
         for token in ("orderForm", "customer", "item", "qty", "amount",
                       "preparing", "followup", "exportJson", "exportCsv",
-                      "importJson", "importFile", "FileReader", "JSON.parse",
+                      "importFile", "FileReader", "JSON.parse",
                       "orders.concat(additions)", "۲ مگابایت"):
             self.assertIn(token, html)
 
@@ -30,6 +30,14 @@ class OfflinePrototypeContractTests(unittest.TestCase):
         self.assertIn("orders=orders.concat(additions)", html)
         self.assertIn("if(!confirm(", html)
         self.assertIn("هیچ داده‌ای وارد نشد", html)
+
+    def test_form_and_restore_reject_blank_or_out_of_range_values(self):
+        html = PROTOTYPE.read_text(encoding="utf-8")
+        self.assertIn("!customer||!item", html)
+        self.assertIn("qty>9999", html)
+        self.assertIn("amount>999999999999", html)
+        self.assertIn("!o.customer.trim()", html)
+        self.assertIn("!o.item.trim()", html)
 
     def test_prototype_warns_against_real_personal_data(self):
         html = PROTOTYPE.read_text(encoding="utf-8")
