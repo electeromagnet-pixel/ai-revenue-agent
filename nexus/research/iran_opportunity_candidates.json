@@ -22,14 +22,20 @@
     "urgency": null,
     "affected_group": "Instagram-based micro-sellers, home businesses and online instructors",
     "willingness_to_pay_evidence": null,
-    "competing_solutions": [],
+    "competing_solutions": [
+      "Iranian hosted storefront/order-management builders such as Sazito and Shopfa; their offline behavior is not verified",
+      "Other store builders such as Portal; exact features and offline behavior require direct verification",
+      "WooCommerce with optional offline POS extensions; availability and suitability for Iranian micro-sellers require verification",
+      "Paper ledgers, spreadsheets, phone notes, local messaging apps, or a human assistant; actual seller usage is unknown"
+    ],
     "uncertainties": [
       "Records include overlapping outage periods and are not seven independent market studies.",
       "No direct interviews or payment evidence.",
       "Offline workflow must work without promising internet-dependent communication or payment.",
-      "Need to inspect existing paper, spreadsheet and local-app workarounds."
+      "Need to inspect existing paper, spreadsheet and local-app workarounds.",
+      "Competitor review found established order-management alternatives; no reviewed source proves whether their key workflows remain usable offline."
     ],
-    "validation_next_step": "Interview 5–8 social-commerce sellers; map the last outage workflow; test an offline order-ledger prototype with dummy data."
+    "validation_next_step": "Interview 5–8 social-commerce sellers; document their actual workaround and compare it with the local-only prototype using dummy data."
   },
   {
     "opportunity_id": "IR-OPP-002",
