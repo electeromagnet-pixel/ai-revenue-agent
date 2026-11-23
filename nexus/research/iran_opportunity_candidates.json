@@ -1,0 +1,90 @@
+[
+  {
+    "opportunity_id": "IR-OPP-001",
+    "problem_statement": "Small online merchants and home-based sellers need a way to preserve orders and customer follow-up when internet platforms become inaccessible.",
+    "geography": "Iran",
+    "domain": "digital commerce and business continuity",
+    "evidence": [
+      "IR-0009",
+      "IR-0010",
+      "IR-0011",
+      "IR-0012",
+      "IR-0013",
+      "IR-0014",
+      "IR-0015"
+    ],
+    "evidence_class": "hypothesis",
+    "status": "candidate",
+    "recurrence_count": 7,
+    "independent_source_count": 4,
+    "confidence": null,
+    "severity": null,
+    "urgency": null,
+    "affected_group": "Instagram-based micro-sellers, home businesses and online instructors",
+    "willingness_to_pay_evidence": null,
+    "competing_solutions": [],
+    "uncertainties": [
+      "Records include overlapping outage periods and are not seven independent market studies.",
+      "No direct interviews or payment evidence.",
+      "Offline workflow must work without promising internet-dependent communication or payment.",
+      "Need to inspect existing paper, spreadsheet and local-app workarounds."
+    ],
+    "validation_next_step": "Interview 5–8 social-commerce sellers; map the last outage workflow; test an offline order-ledger prototype with dummy data."
+  },
+  {
+    "opportunity_id": "IR-OPP-002",
+    "problem_statement": "Farmers in water-stressed producing areas may need localized support to make irrigation and input-purchase decisions under low reservoir levels and high input costs.",
+    "geography": "Iran; province and crop segment to be narrowed",
+    "domain": "agriculture and farm advisory",
+    "evidence": [
+      "IR-0001",
+      "IR-0007",
+      "IR-0016",
+      "IR-0017",
+      "IR-0018"
+    ],
+    "evidence_class": "hypothesis",
+    "status": "needs_evidence",
+    "recurrence_count": 5,
+    "independent_source_count": 3,
+    "confidence": null,
+    "severity": null,
+    "urgency": null,
+    "affected_group": "Crop-specific farmers and producer groups",
+    "willingness_to_pay_evidence": null,
+    "competing_solutions": [],
+    "uncertainties": [
+      "FAO reports a near-average 2026 cereal harvest despite earlier drought effects; risks differ by crop and season.",
+      "No evidence yet that farmers would pay for a digital advisory product.",
+      "Requires local agronomist validation and regional data."
+    ],
+    "validation_next_step": "Select one crop and province; interview farmers and one local agronomist; map existing free and paid advisory services."
+  },
+  {
+    "opportunity_id": "IR-OPP-003",
+    "problem_statement": "Small firms may need simpler operational records and financial visibility to manage inflation, technology gaps and financing constraints.",
+    "geography": "Iran",
+    "domain": "SME operations and finance readiness",
+    "evidence": [
+      "IR-0002",
+      "IR-0004",
+      "IR-0005"
+    ],
+    "evidence_class": "hypothesis",
+    "status": "needs_evidence",
+    "recurrence_count": 3,
+    "independent_source_count": 3,
+    "confidence": null,
+    "severity": null,
+    "urgency": null,
+    "affected_group": "Owner-operated SMEs and small producers",
+    "willingness_to_pay_evidence": null,
+    "competing_solutions": [],
+    "uncertainties": [
+      "Evidence describes broad constraints rather than one repeated operational workflow.",
+      "No direct buyer interviews, competitor review or payment evidence.",
+      "Must not imply the service grants financing or ensures growth."
+    ],
+    "validation_next_step": "Interview five SME owners; identify one recurring recordkeeping or cash-flow task; compare existing tools and test a manual service before software."
+  }
+]
