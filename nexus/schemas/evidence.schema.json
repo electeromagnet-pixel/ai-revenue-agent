@@ -1,19 +1,42 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "NEXUS Evidence",
+  "title": "NEXUS Evidence Intake Record",
+  "description": "One manually documented public-source observation. Passing this schema validates shape only, not truth or market demand.",
   "type": "object",
   "required": [
-    "evidence_id",
+    "problem_statement",
     "source_url",
     "source_title",
-    "collected_at",
-    "evidence_class",
-    "claim"
+    "collected_at"
   ],
   "properties": {
     "evidence_id": {
       "type": "string",
       "minLength": 1
+    },
+    "problem_statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim": {
+      "type": "string",
+      "minLength": 1
+    },
+    "affected_group": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "geography": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domain": {
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "source_url": {
       "type": "string",
@@ -48,15 +71,23 @@
         "inference"
       ]
     },
-    "claim": {
-      "type": "string",
-      "minLength": 1
-    },
     "independent_source_group": {
       "type": [
         "string",
         "null"
       ]
+    },
+    "willingness_to_pay_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "competing_solutions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "review_status": {
       "enum": [
