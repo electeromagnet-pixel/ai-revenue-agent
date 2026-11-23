@@ -2,6 +2,7 @@ import unittest
 from nexus.agents.analyst import analyze
 from nexus.agents.idea_generator import generate
 from nexus.agents.economic_evaluator import evaluate
+from nexus.pipeline.normalize import normalize
 
 
 class PipelineTests(unittest.TestCase):
@@ -23,6 +24,11 @@ class PipelineTests(unittest.TestCase):
              "independent_source_group": "publisher-x"},
         ]
         self.assertEqual(analyze(rows)[0]["independent_source_count"], 1)
+
+    def test_normalization_preserves_explicit_source_group(self):
+        rows = [{"problem_statement": "Slow delivery", "source_url": "https://site.example/a",
+                 "independent_source_group": "publisher-x"}]
+        self.assertEqual(normalize(rows)[0]["independent_source_group"], "publisher-x")
 
     def test_pattern_is_not_demand_or_revenue(self):
         rows = [
