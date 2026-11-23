@@ -82,7 +82,7 @@ $("importFile").addEventListener("change",e=>{
       note:typeof o.note==="string"?o.note.slice(0,180):""};
    });
    const known=new Set(orders.map(o=>o.id));
-   const additions=clean.filter(o=>!known.has(o.id));
+   const additions=clean.filter(o=>{if(known.has(o.id))return false;known.add(o.id);return true;});
    const duplicates=clean.length-additions.length;
    if(!additions.length){alert("سفارش جدیدی برای افزودن وجود ندارد؛ "+duplicates+" مورد تکراری بود.");return;}
    if(!confirm(additions.length+" سفارش جدید اضافه شود؟ سفارش‌های فعلی حفظ می‌شوند."))return;
