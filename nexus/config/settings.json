@@ -1,0 +1,20 @@
+{
+  "project": "NEXUS",
+  "version": "0.1.0",
+  "geography": [
+    "Iran"
+  ],
+  "domains": [
+    "all"
+  ],
+  "minimum_documented_examples": 20,
+  "collection_mode": "manual_public_sources",
+  "paid_apis": false,
+  "llm_enabled": false,
+  "external_actions_enabled": false,
+  "evidence_classes": [
+    "fact",
+    "hypothesis",
+    "inference"
+  ]
+}

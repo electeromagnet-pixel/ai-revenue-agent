@@ -3,7 +3,7 @@ name: Revenue Agent CI
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, nexus-v0.1-foundation]
 
 jobs:
   stripe-ledger:
@@ -277,3 +277,14 @@ jobs:
       - name: Test Stripe revenue event normalization
         run: node --test tests/stripe_paid_event.test.mjs tests/stripe_apex_ownership.test.mjs tests/stripe_webhook_body.test.mjs tests/stripe_lead_attribution.test.mjs
 
+  nexus-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile NEXUS Python modules
+        run: python -m compileall -q nexus tests/nexus
+      - name: Run NEXUS unit tests
+        run: python -m unittest discover -s tests/nexus -v
