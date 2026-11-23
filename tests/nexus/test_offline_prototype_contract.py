@@ -52,6 +52,20 @@ class OfflinePrototypeContractTests(unittest.TestCase):
         self.assertIn("هیچ داده‌ای وارد نشد", html)
         self.assertIn("orders=orders.concat(additions)", html)
 
+
+    def test_restore_ignores_duplicate_ids_in_existing_and_incoming_orders(self):
+        html = PROTOTYPE.read_text(encoding="utf-8")
+        known = html.index("const known=new Set(orders.map(o=>o.id))")
+        duplicate_filter = html.index("const additions=clean.filter")
+        add_to_known = html.index("known.add(o.id)", duplicate_filter)
+        append = html.index("orders=orders.concat(additions)")
+        self.assertLess(known, duplicate_filter)
+        self.assertLess(duplicate_filter, add_to_known)
+        self.assertLess(add_to_known, append)
+        self.assertIn("if(!known.has(o.id))return false", html)
+        self.assertIn("const duplicates=clean.length-additions.length", html)
+        self.assertIn("سفارش جدیدی برای افزودن وجود ندارد", html)
+
     def test_prototype_warns_against_real_personal_data(self):
         html = PROTOTYPE.read_text(encoding="utf-8")
         self.assertIn("فقط با اطلاعات ساختگی", html)
