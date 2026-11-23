@@ -39,7 +39,7 @@ const KEY="nexus_offline_ledger_demo_v1";
 const labels={new:"جدید",preparing:"در حال آماده‌سازی",sent:"ارسال‌شده",done:"تکمیل‌شده",followup:"نیازمند پیگیری"};
 const $=id=>document.getElementById(id);
 let orders=[];try{const raw=localStorage.getItem(KEY);orders=raw?JSON.parse(raw):[];if(!Array.isArray(orders))orders=[];}catch(e){orders=[];}
-function save(){localStorage.setItem(KEY,JSON.stringify(orders));render();}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(orders));render();}catch(e){alert("ذخیره‌سازی در این مرورگر در دسترس نیست. فعلاً از خروجی پشتیبان استفاده کنید.");}}
 function safe(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function render(){
  const q=$("search").value.trim().toLocaleLowerCase("fa"),f=$("filter").value;
