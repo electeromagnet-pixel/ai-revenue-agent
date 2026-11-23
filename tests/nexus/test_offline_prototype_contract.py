@@ -18,8 +18,18 @@ class OfflinePrototypeContractTests(unittest.TestCase):
     def test_core_order_workflow_and_data_export_exist(self):
         html = PROTOTYPE.read_text(encoding="utf-8")
         for token in ("orderForm", "customer", "item", "qty", "amount",
-                      "preparing", "followup", "exportJson", "exportCsv"):
+                      "preparing", "followup", "exportJson", "exportCsv",
+                      "importJson", "importFile", "FileReader", "JSON.parse",
+                      "orders.concat(additions)", "۲ مگابایت"):
             self.assertIn(token, html)
+
+    def test_restore_is_non_destructive_and_checks_duplicate_ids(self):
+        html = PROTOTYPE.read_text(encoding="utf-8")
+        self.assertIn("const known=new Set(orders.map(o=>o.id))", html)
+        self.assertIn("clean.filter(o=>!known.has(o.id))", html)
+        self.assertIn("orders=orders.concat(additions)", html)
+        self.assertIn("if(!confirm(", html)
+        self.assertIn("هیچ داده‌ای وارد نشد", html)
 
     def test_prototype_warns_against_real_personal_data(self):
         html = PROTOTYPE.read_text(encoding="utf-8")
