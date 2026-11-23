@@ -39,6 +39,19 @@ class OfflinePrototypeContractTests(unittest.TestCase):
         self.assertIn("!o.customer.trim()", html)
         self.assertIn("!o.item.trim()", html)
 
+
+    def test_mixed_backup_is_validated_atomically_before_any_import(self):
+        html = PROTOTYPE.read_text(encoding="utf-8")
+        validation = html.index("const clean=incoming.map")
+        duplicate_check = html.index("const known=new Set(orders.map(o=>o.id))")
+        mutation = html.index("orders=orders.concat(additions)")
+        invalid_rejection = html.index("throw new Error(\"اطلاعات سفارش شماره \"")
+        self.assertLess(validation, duplicate_check)
+        self.assertLess(duplicate_check, mutation)
+        self.assertLess(invalid_rejection, mutation)
+        self.assertIn("هیچ داده‌ای وارد نشد", html)
+        self.assertIn("orders=orders.concat(additions)", html)
+
     def test_prototype_warns_against_real_personal_data(self):
         html = PROTOTYPE.read_text(encoding="utf-8")
         self.assertIn("فقط با اطلاعات ساختگی", html)
