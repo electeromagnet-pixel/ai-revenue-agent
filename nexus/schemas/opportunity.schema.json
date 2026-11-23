@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NEXUS Opportunity",
+  "type": "object",
+  "required": [
+    "opportunity_id",
+    "problem_statement",
+    "geography",
+    "evidence",
+    "evidence_class",
+    "status"
+  ],
+  "properties": {
+    "opportunity_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "problem_statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "affected_group": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "geography": {
+      "type": "string"
+    },
+    "domain": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "recurrence_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "independent_source_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "severity": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "urgency": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "willingness_to_pay_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "competing_solutions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "validation_next_step": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_class": {
+      "enum": [
+        "fact",
+        "hypothesis",
+        "inference"
+      ]
+    },
+    "status": {
+      "enum": [
+        "unreviewed",
+        "needs_evidence",
+        "candidate",
+        "rejected"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
