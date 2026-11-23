@@ -1,8 +1,9 @@
-"""Normalize records into a stable minimal shape."""
+"""Normalize records into a stable, schema-aligned minimal shape."""
 FIELDS = (
-    "problem_statement", "affected_group", "geography", "domain", "source_url",
-    "source_title", "published_at", "collected_at", "excerpt", "evidence_class",
-    "independent_source_group", "willingness_to_pay_evidence", "competing_solutions",
+    "evidence_id", "problem_statement", "claim", "affected_group", "geography",
+    "domain", "source_url", "source_title", "published_at", "collected_at",
+    "excerpt", "evidence_class", "independent_source_group",
+    "willingness_to_pay_evidence", "competing_solutions", "review_status",
 )
 
 
