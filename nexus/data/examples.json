@@ -15,7 +15,9 @@
     "independent_source_group": "worldbank.org",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "AGRI_WATER_INPUT",
+    "theme_label": "Agricultural water, input-cost and production risks"
   },
   {
     "evidence_id": "IR-0002",
@@ -33,7 +35,9 @@
     "independent_source_group": "worldbank.org",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "SME_CAPABILITY_FINANCE",
+    "theme_label": "SME finance, technology and management constraints"
   },
   {
     "evidence_id": "IR-0003",
@@ -51,7 +55,9 @@
     "independent_source_group": "iranopendata.org",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "EMPLOYMENT_ACCESS",
+    "theme_label": "Employment access and labor-market barriers"
   },
   {
     "evidence_id": "IR-0004",
@@ -69,7 +75,9 @@
     "independent_source_group": "magiran.com",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "SME_CAPABILITY_FINANCE",
+    "theme_label": "SME finance, technology and management constraints"
   },
   {
     "evidence_id": "IR-0005",
@@ -87,7 +95,9 @@
     "independent_source_group": "sciencedirect.com",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "SME_CAPABILITY_FINANCE",
+    "theme_label": "SME finance, technology and management constraints"
   },
   {
     "evidence_id": "IR-0006",
@@ -105,7 +115,9 @@
     "independent_source_group": "worldbank.org",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "MACROECONOMIC_UNCERTAINTY",
+    "theme_label": "Macroeconomic uncertainty and planning"
   },
   {
     "evidence_id": "IR-0007",
@@ -123,7 +135,9 @@
     "independent_source_group": "bti-project.org",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "AGRI_WATER_INPUT",
+    "theme_label": "Agricultural water, input-cost and production risks"
   },
   {
     "evidence_id": "IR-0008",
@@ -141,7 +155,9 @@
     "independent_source_group": "worldbank.org",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "EMPLOYMENT_ACCESS",
+    "theme_label": "Employment access and labor-market barriers"
   },
   {
     "evidence_id": "IR-0009",
@@ -159,7 +175,9 @@
     "independent_source_group": "femena.net",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "DIGITAL_BUSINESS_CONTINUITY",
+    "theme_label": "Digital business continuity and customer access"
   },
   {
     "evidence_id": "IR-0010",
@@ -177,7 +195,9 @@
     "independent_source_group": "rferl.org",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "DIGITAL_BUSINESS_CONTINUITY",
+    "theme_label": "Digital business continuity and customer access"
   },
   {
     "evidence_id": "IR-0011",
@@ -195,7 +215,9 @@
     "independent_source_group": "iranintl.com",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "DIGITAL_BUSINESS_CONTINUITY",
+    "theme_label": "Digital business continuity and customer access"
   },
   {
     "evidence_id": "IR-0012",
@@ -213,7 +235,9 @@
     "independent_source_group": "iranintl.com",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "DIGITAL_BUSINESS_CONTINUITY",
+    "theme_label": "Digital business continuity and customer access"
   },
   {
     "evidence_id": "IR-0013",
@@ -231,7 +255,9 @@
     "independent_source_group": "iranintl.com",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "DIGITAL_BUSINESS_CONTINUITY",
+    "theme_label": "Digital business continuity and customer access"
   },
   {
     "evidence_id": "IR-0014",
@@ -249,7 +275,9 @@
     "independent_source_group": "iranintl.com",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "DIGITAL_BUSINESS_CONTINUITY",
+    "theme_label": "Digital business continuity and customer access"
   },
   {
     "evidence_id": "IR-0015",
@@ -267,7 +295,9 @@
     "independent_source_group": "thenationalnews.com",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "DIGITAL_BUSINESS_CONTINUITY",
+    "theme_label": "Digital business continuity and customer access"
   },
   {
     "evidence_id": "IR-0016",
@@ -285,7 +315,9 @@
     "independent_source_group": "fao.org",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "AGRI_WATER_INPUT",
+    "theme_label": "Agricultural water, input-cost and production risks"
   },
   {
     "evidence_id": "IR-0017",
@@ -303,7 +335,9 @@
     "independent_source_group": "fao.org",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "AGRI_WATER_INPUT",
+    "theme_label": "Agricultural water, input-cost and production risks"
   },
   {
     "evidence_id": "IR-0018",
@@ -321,7 +355,9 @@
     "independent_source_group": "fao.org",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "AGRI_WATER_INPUT",
+    "theme_label": "Agricultural water, input-cost and production risks"
   },
   {
     "evidence_id": "IR-0019",
@@ -339,7 +375,9 @@
     "independent_source_group": "undp.org",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "BUSINESS_CONTINUITY_SHOCKS",
+    "theme_label": "Local business continuity shocks"
   },
   {
     "evidence_id": "IR-0020",
@@ -357,6 +395,8 @@
     "independent_source_group": "iran.un.org",
     "willingness_to_pay_evidence": null,
     "competing_solutions": [],
-    "review_status": "unreviewed"
+    "review_status": "unreviewed",
+    "theme_id": "BUSINESS_CONTINUITY_SHOCKS",
+    "theme_label": "Local business continuity shocks"
   }
 ]
