@@ -3,7 +3,7 @@ name: Revenue Agent CI
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, nexus-v0.1-foundation]
 
 jobs:
   stripe-ledger:
@@ -204,7 +204,7 @@ jobs:
         env:
           REVENUE_DB_PATH: /tmp/revenue_agent.db
         run: |
-          printf 'first_name,company_name,contact_email,industry,pain_point,website,contact_allowed\\nJane,Jane Plumbing,jane@example.com,Home Services,slow inquiry follow-up,https://example.com,true\\n' > /tmp/leads.csv
+          printf 'first_name,company_name,contact_email,industry,pain_point,website,contact_allowed\nJane,Jane Plumbing,jane@example.com,Home Services,slow inquiry follow-up,https://example.com,true\n' > /tmp/leads.csv
           python scripts/import_leads.py /tmp/leads.csv | python scripts/revenue_cycle.py > /tmp/result.json
           python - <<'PY'
           import json
