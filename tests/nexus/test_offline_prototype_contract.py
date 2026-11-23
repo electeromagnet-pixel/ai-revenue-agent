@@ -73,5 +73,12 @@ class OfflinePrototypeContractTests(unittest.TestCase):
         self.assertIn("همگام‌سازی", html)
 
 
+    def test_user_supplied_order_text_is_html_escaped_before_rendering(self):
+        html = PROTOTYPE.read_text(encoding="utf-8")
+        self.assertIn("function safe(value)", html)
+        for token in ("safe(o.item)", "safe(o.customer)", "safe(o.date||", "safe(o.note)", "safe(o.id)"):
+            self.assertIn(token, html)
+        self.assertIn('replace(/[&<>"\']/g,c=>', html)
+
 if __name__ == "__main__":
     unittest.main()
